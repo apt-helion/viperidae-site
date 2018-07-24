@@ -6,8 +6,6 @@ import click
 import os
 from simplerr import dispatcher
 from playhouse.dataset import DataSet
-from website.config import Config
-from website.common.models import main
 
 """
 Example usage
