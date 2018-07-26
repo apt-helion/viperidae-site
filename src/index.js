@@ -5,7 +5,7 @@ import './index.css';
 class Main extends React.Component {
     render() {
         return (
-            <div class="main">
+            <div className="main">
                 <h1>Viperidae</h1>
                 <h2>Open Source Search Engine</h2>
                 <p>This is the restricted, public version. If you are a developer please go <a href="https://developer.viperidae.app">here.</a></p>
@@ -20,12 +20,27 @@ class InputField extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            website: '',
+            search: '',
             submitForm: false,
         };
     }
 
+    updateWebsite(evt) {
+        this.setState({
+            website: evt.target.value
+        });
+    }
+
+    updateSearch(evt) {
+        this.setState({
+            search: evt.target.value
+        });
+    }
+
     submit() {
-        alert('hello');
+        console.log(this.state.search);
+        console.log(this.state.website);
     }
 
     clickButton() {
@@ -38,85 +53,64 @@ class InputField extends React.Component {
         }
     }
 
-
     render() {
         const buttonValue = this.state.submitForm ? 'Submit' : 'Next';
 
         if (this.state.submitForm) {
             return (
                 <div>
-                    <SearchInput />
-                    <button className="btn main-btn"
-                        onClick={() => this.clickButton()}
-                        type="button">{buttonValue}</button>
+                    <SearchInput onChange={(evt) => this.updateSearch(evt)} />
+                    <SubmitButton onClick={() => this.clickButton()} value={buttonValue} />
                 </div>
             )
         } else {
             return (
                 <div>
-                    <WebsiteInput />
-                    <button className="btn main-btn"
-                        onClick={() => this.clickButton()}
-                        type="button">{buttonValue}</button>
+                    <WebsiteInput onChange={(evt) => this.updateWebsite(evt)} />
+                    <SubmitButton onClick={() => this.clickButton()} value={buttonValue} />
                 </div>
             )
         }
     }
 }
 
-class WebsiteInput extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            inputValue: ''
-        };
+class SubmitButton extends React.Component {
+    render() {
+        return (
+            <button className="btn main-btn"
+                onClick={() => this.props.onClick()}
+                type="button">
+                {this.props.value}
+            </button>
+        )
     }
+}
 
+class WebsiteInput extends React.Component {
     render() {
         return (
             <div className="field">
                 <label>Enter a website url</label> <br/>
                 <div className="control">
                     <input className="input is-primary"
-                        value={this.state.inputValue}
-                        onChange={evt => this.updateInputValue(evt)}/>
+                        onChange={evt => this.props.onChange(evt)}/>
                 </div>
             </div>
         )
-    }
-
-    updateInputValue(evt) {
-        this.setState({
-            inputValue: evt.target.value
-        });
     }
 }
 
 class SearchInput extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            inputValue: ''
-        };
-    }
-
     render() {
         return (
-            <div class="field">
+            <div className="field">
                 <label>Enter a search term.</label> <br/>
-                <div class="control">
-                    <input class="input is-primary"
-                        value={this.state.inputValue}
-                        onChange={evt => this.updateInputValue(evt)}/>
+                <div className="control">
+                    <input className="input is-primary"
+                        onChange={evt => this.props.onChange(evt)}/>
                 </div>
             </div>
         )
-    }
-
-    updateInputValue(evt) {
-        this.setState({
-            inputValue: evt.target.value
-        });
     }
 }
 
