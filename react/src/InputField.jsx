@@ -90,11 +90,11 @@ function WebsiteInput(props) {
 
 function SearchInput(props) {
     return (
-        <div className="field">
+        <div className="field fade-in">
             <label>Enter a search term for</label> <br />
 
             <p className="confirm-text">
-                <small>{props.website}</small>
+                <i><small>{props.website}</small></i>
             </p>
 
             <div className="control">
@@ -106,3 +106,4 @@ function SearchInput(props) {
         </div>
     )
 }
+
