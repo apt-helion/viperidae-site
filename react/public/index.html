@@ -7,13 +7,28 @@
 </head>
 
 <body>
-    <div class="header">
+    <div id="header" class="header">
+        <p class="home"><a href="/">Viperidae</a></p>
+        <ul>
+            <li><p class="links"><a href="https://github.com/apt-helion/viperidae">GitHub</a></p></li>
+            <li><p class="links"><a href="https://devloper.viperidae.app">Developer API</a></p></li>
+        </ul>
     </div>
 
     <div id="app" />
 
-    <div class="footer">
-    </div>
-</body>
+    <script>
+    window.onscroll = function() {myFunction()};
+    var header = document.getElementById("header");
+    var sticky = header.offsetTop;
+    function myFunction() {
+        if (window.pageYOffset > sticky) {
+            header.classList.add("sticky");
+        } else {
+            header.classList.remove("sticky");
+        }
+    }
+    </script>
 
+</body>
 </html>
