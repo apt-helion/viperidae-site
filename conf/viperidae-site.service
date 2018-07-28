@@ -1,0 +1,13 @@
+[Unit]
+Description=Gunicorn instace to serve viperidae.app
+After=network.target
+
+[Service]
+User=root
+Group=www-data
+WorkingDirectory=/var/www/viperidae.app
+Environment="PATH=/var/www/viperidae.app/env/bin"
+ExecStart=/var/www/viperidae.app/env/bin/gunicorn wsgi:app --bind unix:viperidae.sock --error-logfile /var/log/viperidae-site/error.log --access-logfile /var/log/viperidae-site/access.log
+
+[Install]
+WantedBy=multi-user.target
